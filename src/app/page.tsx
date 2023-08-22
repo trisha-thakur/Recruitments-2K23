@@ -1,6 +1,7 @@
 "use client";
 import Navbar from "@/components/Navbar";
 import SignInModal from "@/components/SignInModal";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
         <SignInModal />
         <div className="hero-content flex-col gap-4 max-w-none text-center">
             <h1 className="text-6xl font-bold font-f1">Recruitments 2K23</h1>
-            <button className="btn btn-wide glass btn-primary">Register</button>
+            <Link href="/register" className="btn btn-wide glass btn-primary">Register</Link>
         </div>
       </div>
     </>
