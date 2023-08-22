@@ -1,8 +1,7 @@
-import React from 'react'
+import React, {LegacyRef} from 'react'
 import { InputProps } from '@/utils/types';
 
-
-const Input = ({label, placeholder, type, ref}: InputProps) => {
+const Input = ({label, placeholder, type}: InputProps, ref: LegacyRef<HTMLInputElement>) => {
   return (
     <div className="form-control w-full max-w-xs">
       <label className="label"><span className="label-text text-neutral">{label}</span></label>
@@ -11,4 +10,4 @@ const Input = ({label, placeholder, type, ref}: InputProps) => {
   )
 };
 
-export default Input
+export default React.forwardRef(Input);
