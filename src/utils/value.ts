@@ -9,6 +9,6 @@ const RegEx : RegisterInterface = {
     password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/
 }
 
-export const validateInput = (value: string, label: keyof RegisterInterface) => {
-    return RegEx[label].test(value)
+export const validateInput = (value: string | undefined, label: keyof RegisterInterface) => {
+    return RegEx[label].test(value as string)
 }

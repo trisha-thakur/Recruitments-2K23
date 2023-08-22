@@ -24,6 +24,11 @@ const Page = () => {
     const phone = phoneRef.current?.value.trim()
     const password = passwordRef.current?.value.trim()
     const confirmPassword = confirmPasswordRef.current?.value.trim()
+
+    if (!validateInput(name, 'name')) {
+      nameRef.current?.focus()
+      return
+    }
   }
 
   return (
