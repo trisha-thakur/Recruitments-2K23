@@ -2,7 +2,7 @@ export {};
 
 declare global {
     interface Window {
-        sign_in: HTMLDialogElement,
+        loading: HTMLDialogElement,
     }
 }
 export interface InputProps {

@@ -51,8 +51,8 @@ const Page = () => {
   }
 
   return (
-    <main className='px-[4vw] py-4'>
-      <h1 className='font-f1 font-bold text-5xl mb-8'>Register</h1>
+    <main className='px-[4vw] py-4 font-f1'>
+      <h1 className='font-bold text-5xl mb-8'>Register</h1>
       <form onSubmit={submitHandler}>
         <Input ref={nameRef} label='Name' placeholder='John Doe' type='text'/>
         <Input ref={registerNoRef} label='Register Number' placeholder='RA2XXXXXXXXXXXX' type='text'/>
