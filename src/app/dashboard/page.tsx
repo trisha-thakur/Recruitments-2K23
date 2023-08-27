@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react'
 import { getApplicant } from '@/utils/API';
 import Navbar from '@/components/Navbar';
 import { IApplicant } from '@/utils/types';
+import { submitTask } from '@/utils/API';
 import Input from '@/components/ui/Input';
 
 const Page = () => {
@@ -26,7 +27,13 @@ const Page = () => {
 
     const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const submission = submissionRef.current?.value;        
+        const submission = submissionRef.current?.value.trim(); 
+        let data;
+        if (submission !== '' && submission !== undefined && submission !== null) {
+            submitTask(srmEmail as string, submission).then((res) => {
+                if(res.success) window.location.href = '/thankyou';
+            })
+        }
     }
 
     return (

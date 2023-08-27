@@ -44,3 +44,14 @@ export const POST = async (req: Request, res: Response) => {
     return NextResponse.json({ message: "Application failed", success: false });
   }
 };
+
+export const PUT = async (req: Request, res: Response) => {
+  await dbConnect();
+  const data = await req.json();
+  try {
+    const user = await Applicant.findOneAndUpdate({srmEmail: data.srmEmail}, {submission: data.submission, status: 'Completed'});
+    return NextResponse.json({ message: "Application updated", success: true });
+  } catch (error) {
+    return NextResponse.json({ message: "Application failed", success: false });
+  }
+};

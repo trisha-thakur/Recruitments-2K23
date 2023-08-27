@@ -69,24 +69,11 @@ const Page = () => {
       subDomain: selectSubDomain as string,
     }
 
-    // Perform validation
-
     // Send data to server
     try {
       const response = await registerApplicant(data)
-      console.log(response);
       if(!response.ok) throw new Error(response.message)
-      emailRef.current!.value = ''
-      phoneRef.current!.value = ''
-      addressRef.current!.value = ''
-      dobRef.current!.value = ''
-      instagramRef.current!.value = ''
-      linkedInRef.current!.value = ''
-      twitterRef.current!.value = ''
-      githubRef.current!.value = ''
-      setSelectedDomain(null)
-      setSelectSubDomain(null)
-      window.location.href = `/dashboard`
+      window.location.href = `/`
     } catch (error: any) {
       toast(error.message, 'error')
     } finally {

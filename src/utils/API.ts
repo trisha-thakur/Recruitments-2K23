@@ -23,3 +23,18 @@ export const getApplicant = async (email: string) => {
     console.log(err)
   }
 };
+
+export const submitTask = async (srmEmail: string, submission: string) => {
+  try{
+    const response = await fetch(`/api/register`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ srmEmail, submission }),
+    });
+    if(!response.ok) throw new Error('Error submitting application')
+    const data = await response.json();
+    return data;
+  } catch(err){
+    console.log(err)
+  }
+}
