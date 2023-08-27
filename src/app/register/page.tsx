@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import { useSession } from 'next-auth/react'
 
 import Input from '@/components/ui/Input'
@@ -29,7 +29,24 @@ const Page = () => {
   const githubRef = useRef<HTMLInputElement>(null)
 
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null);
+  const [subDomainOptions, setSubDomainOptions] = useState<string[] | null>(null);
+  const [selectSubDomain, setSelectSubDomain] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if(selectedDomain === 'Technical') {
+      setSubDomainOptions((prevState) => prevState = ["AI/ML", "Web Dev", "App Dev"]);
+    } else if(selectedDomain === 'Corporate') {
+      setSubDomainOptions((prevState) => prevState = ["Content", "Events & PR", "Sponsorship"]);
+    } else if(selectedDomain === 'Creatives') {
+      setSubDomainOptions((prevState) => prevState = ["UI/UX", "VFX/GFX", "Photography"]);
+    } else if(selectedDomain === 'Research') {
+      setSubDomainOptions((prevState) => prevState = ["R&D"]);
+    }
+    else {
+      setSubDomainOptions((prevState) => prevState = []);
+    }
+  }, [selectedDomain])
 
   const submitHandler = async (e: React.FormEvent) => {
     setLoading(true)
@@ -48,7 +65,8 @@ const Page = () => {
         twitter: twitterRef.current?.value.trim() as string,
         github: githubRef.current?.value.trim() as string,
       },
-      domain: selectedDomain as string
+      domain: selectedDomain as string,
+      subDomain: selectSubDomain as string,
     }
 
     // Perform validation
@@ -67,6 +85,7 @@ const Page = () => {
       twitterRef.current!.value = ''
       githubRef.current!.value = ''
       setSelectedDomain(null)
+      setSelectSubDomain(null)
       window.location.href = `/dashboard`
     } catch (error: any) {
       toast(error.message, 'error')
@@ -98,6 +117,15 @@ const Page = () => {
           <Select style="md:grid-cols-2 gap-2 mt-2" options={['Technical', 'Corporate', 'Creatives', 'Research']} setSelectedOption={setSelectedDomain} selectedOption={selectedDomain} />
           <p className="mt-4"> Selected Option: {selectedDomain ? selectedDomain : 'None selected'}</p>
         </div>
+        {
+          selectedDomain && (
+            <div className='mt-4 max-w-screen-md'>
+              <label className='text-neutral'>Choose Sub Domain</label>
+              <Select style="md:grid-cols-2 gap-2 mt-2" options={subDomainOptions!} setSelectedOption={setSelectSubDomain} selectedOption={selectSubDomain} />
+              <p className="mt-4"> Selected Option: {selectSubDomain ? selectSubDomain : 'None selected'}</p>
+            </div>
+          )
+        }
         <button type='submit' className="btn btn-primary mt-4 font-normal">{loading ? <span className="loading loading-spinner loading-sm"></span> : "Register"}</button>
       </form>
     </main>

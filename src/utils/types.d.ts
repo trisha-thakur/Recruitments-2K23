@@ -43,7 +43,9 @@ export interface IApplicant{
     }
     domain: string
     subDomain: string
-    submission: string
+    submission?: string
+    tasks?: Array<string>
+    status?: string
     createdAt?: string
     updatedAt?: string
     __v?: number
@@ -62,6 +64,6 @@ export interface ToastProviderProps {
 }
 export interface ITask {
     [key: string]: {
-        [key: string]: Array<string> | string;
+        [key: string]: Array<string>;
     };
 }

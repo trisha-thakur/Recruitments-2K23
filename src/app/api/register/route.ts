@@ -2,7 +2,6 @@ import {NextApiRequest, NextApiResponse } from 'next';
 import { NextResponse } from 'next/server';
 import dbConnect from '@/lib/dbConnect';
 import Applicant from '@/backend/models/Applicant';
-
 import {tasks} from '@/backend/data';
 import { ITask } from '@/utils/types';
 
@@ -28,7 +27,7 @@ export const GET = async (req: NextApiRequest, res: NextApiResponse) => {
     }
     // Get task as per subDomain and yearofStudy
     const task: string | Array<string> = tasks[subDomain][yearofStudy];
-    return NextResponse.json({ data: {...user, task}, message: "User found", success: true });
+    return NextResponse.json({ data: {...user, tasks: task}, message: "User found", success: true });
   }
   catch(error){
     return NextResponse.json({ data: null, message: "User not found", success: false });
