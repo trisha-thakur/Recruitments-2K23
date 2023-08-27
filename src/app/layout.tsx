@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import localFont from '@next/font/local'
 import AuthProvider from '@/context/AuthContext'
 import Script from 'next/script'
+import { ToastProvider } from '@/context/UiContext'
 
 const F1 = localFont({
   src: [
@@ -22,7 +23,11 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en" className={`${F1.variable}`}>
       <Script src="https://kit.fontawesome.com/acbdca7f8c.js" crossOrigin="anonymous" async/>
       <AuthProvider>
-        <body>{children}</body>
+        <body>
+          <ToastProvider>
+            {children}
+          </ToastProvider>
+        </body>
       </AuthProvider>
     </html>
   )

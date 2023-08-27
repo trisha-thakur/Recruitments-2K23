@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const OptionBox: React.FC<{ label: string; onClick: () => void; isSelected: boolean }> = ({label, onClick, isSelected,}) => {
   return (
-    <button type='button' className={`p-4 max-w-sm border rounded-lg hover:border-secondary ${isSelected ? 'bg-secondary' : ''}`} onClick={onClick}>{label}</button>
+    <button type='button' className={`p-4 max-w-xs border rounded-lg hover:border-secondary ${isSelected ? 'bg-secondary' : ''}`} onClick={onClick}>{label}</button>
   );
 };
 
