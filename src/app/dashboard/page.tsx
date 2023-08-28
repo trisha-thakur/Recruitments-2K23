@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Key, useEffect } from 'react'
+import React, { Key, use, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 
 import { getApplicant } from '@/utils/API';
@@ -41,24 +41,25 @@ const Page = () => {
 
     return (
         <>
-            <Navbar />{
+            <Navbar />
+            { status === "unauthenticated" && <div className='hero min-h-screen bg-base-200 text-4xl'>Oops ! Sign In First</div>}
+            {
                 loading || status==="loading" ? (<div className='hero min-h-screen bg-base-200'><span className="loading loading-spinner loading-sm"></span></div>) :
-            
-            <div className="hero pt-32 xs:pt-0 justify-start px-[4vw] min-h-screen bg-base-200">
-                <div className='max-w-4xl'>
-                    <h1 className='text-2xl font-f1 mb-4'>Hello, {applicant?.name}</h1>
-                    <h2 className='text-xs font-f1 text-secondary'>Your Tasks ({applicant?.subDomain})</h2>
-                    <ul className=' list-inside list-decimal my-4'>
-                    {tasks.map((task: string, index: Key) => <li className='text-md md:text-xl mb-2' key={index}>{task}</li>)}
-                    </ul>
-                    <strong className='mt-4'>{
-                        applicant?.domain === "Technical" ? "*Please submit your files through a GitHub repository" : "*Upload your PDF/JPEG Files by generating a shareable Drive link with appropriate access permissions" }</strong>
-                    <form onSubmit={submitHandler}>
-                        <Input ref={submissionRef} type='url' label={`Upload your ${applicant?.domain === "Technical" ? "GitHub" : "Drive"} link here`} placeholder="https://" />
-                        <button type="submit" className='btn btn-primary mt-2'>Submit</button>
-                    </form>
+                <div className="hero pt-32 xs:pt-0 justify-start px-[4vw] min-h-screen bg-base-200">
+                    <div className='max-w-4xl'>
+                        <h1 className='text-2xl font-f1 mb-4'>Hello, {applicant?.name}</h1>
+                        <h2 className='text-xs font-f1 text-secondary'>Your Tasks ({applicant?.subDomain})</h2>
+                        <ul className=' list-inside list-decimal my-4'>
+                        {tasks.map((task: string, index: Key) => <li className='text-md md:text-xl mb-2' key={index}>{task}</li>)}
+                        </ul>
+                        <strong className='mt-4'>{
+                            applicant?.domain === "Technical" ? "*Please submit your files through a GitHub repository" : "*Upload your PDF/JPEG Files by generating a shareable Drive link with appropriate access permissions" }</strong>
+                        <form onSubmit={submitHandler}>
+                            <Input ref={submissionRef} type='url' label={`Upload your ${applicant?.domain === "Technical" ? "GitHub" : "Drive"} link here`} placeholder="https://" />
+                            <button type="submit" className='btn btn-primary mt-2'>Submit</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
             }
         </>
     )

@@ -13,10 +13,10 @@ export default function Home() {
     if(session) {
       if (session.user?.email) {
         getApplicant(session.user.email).then((applicant) => {
-          console.log(applicant.data);
           if(applicant.data) {
             window.location.href = '/dashboard';
           }
+          else window.location.href = '/register';
         })
     }}
   }, [session])
@@ -29,7 +29,7 @@ export default function Home() {
           <h1 className="text-6xl font-bold font-f1">Recruitments 2K23</h1>
           <Clock />
           <button className="btn btn-wide glass btn-primary" onClick={() => signIn("google", { callbackUrl: '/register' })}>Register</button>
-          <a className="text-secondary" onClick={()=>signIn("google")}>Already Registered ? Check you Task</a>
+          <a className="text-secondary cursor-pointer" onClick={()=>signIn("google")}>Already Registered ? Check you Task</a>
         </div>
       </div>
     </>
