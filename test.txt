@@ -1,2 +1,0 @@
-'(credentials: Record<"username" | "password", string> | undefined) => Promise<{ srmEmail: string; password: string; } | null>' 
-'(credentials: Record<"username" | "password", string> | undefined, req: Pick<RequestInternal, "headers" | "body" | "query" | "method">) => Awaitable<...>'.

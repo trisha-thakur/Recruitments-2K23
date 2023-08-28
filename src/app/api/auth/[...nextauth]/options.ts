@@ -10,7 +10,15 @@ export const options: NextAuthOptions = {
                 params: {
                     hd: 'srmist.edu.in'
                 }
-            }            
+            }    
         }),
     ],
+    callbacks: {
+        // Check if the user is signIn or signUp
+        async signIn({user}) {
+            const isAllowedToSignIn = user.email!.endsWith('@srmist.edu.in')
+            if (isAllowedToSignIn) return true;
+            else return false;
+        }
+    }
 }

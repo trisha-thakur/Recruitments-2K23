@@ -37,7 +37,7 @@ const Page = () => {
     if(selectedDomain === 'Technical') {
       setSubDomainOptions((prevState) => prevState = ["AI/ML", "Web Dev", "App Dev"]);
     } else if(selectedDomain === 'Corporate') {
-      setSubDomainOptions((prevState) => prevState = ["Content", "Events & PR", "Sponsorship"]);
+      setSubDomainOptions((prevState) => prevState = ["Content", "Event Management", "Public Relations", "Sponsorship"]);
     } else if(selectedDomain === 'Creatives') {
       setSubDomainOptions((prevState) => prevState = ["UI/UX", "VFX/GFX", "Photography"]);
     } else if(selectedDomain === 'Research') {
@@ -70,15 +70,9 @@ const Page = () => {
     }
 
     // Send data to server
-    try {
-      const response = await registerApplicant(data)
-      if(!response.ok) throw new Error(response.message)
-      window.location.href = `/`
-    } catch (error: any) {
-      toast(error.message, 'error')
-    } finally {
-      setLoading(false);
-    }
+    const response = await registerApplicant(data);
+    if(response.success) window.location.href = window.location.origin + '/dashboard'
+    else toast(response.message, 'error')
   }
 
   return (
