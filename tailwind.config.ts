@@ -10,7 +10,10 @@ const config: Config = {
     extend: {
       fontFamily: {
         f1: ['var(--font-f1)'],
-      }
+      },
+      // backgroundImage: {
+      //   'bgLanding' : "url('../public/images/Logo.png')",
+      // }
     },
   },
   plugins: [require("daisyui")],

@@ -14,7 +14,7 @@ const Page = () => {
   const { data: session } = useSession()
   const toast = useToast();
 
-  if(!session) window.location.href = '/'
+  // if(!session) window.location.href = '/'
 
   const names = session?.user?.name?.split(' ');
   const name = names ? names[0] + ' ' + names[1] : '';
